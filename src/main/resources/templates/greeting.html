@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p th:text="'Hello, ' + ${name} + '!'"/>
+
+<form action="#" th:action="@{/greeting}" th:object="${messageMode}" method="post"><!--th:object="${textFromSubmit}"-->
+    <!--    <input type="text" name="mode" id="mode" value="someText">-->
+    <select id="mode" name="mode" >
+        <option
+                name="mode"
+                th:each="variant : ${fillingModeEnum}"
+                th:text="${variant.description}"
+        >
+        </option>
+    </select>
+    <input type="submit" value="save" name="save">
+    <!--    <input value="save" name="save">-->
+</form>
+
+<!--<p th:text="${inputText}"/>-->
+<!--<th:block th:if="${inputText}=='file_mode'">-->
+<!--    <span>Win! file_mode was choosen</span>-->
+<!--</th:block>-->
+<div th:switch="${inputText}">
+    <div th:case="'file_mode'">
+        <p> file mode selected, please upload file</p>
+        <input type="file" value="file">
+        <input type="submit" value="send">
+    </div>
+    <div th:case="'text_mode'">
+        <p> file mode selected, please upload file</p>
+        <form>
+            <input type="text" value="mesage">
+            <input type="submit" value="send">
+        </form>
+    </div>
+</div>
+</body>
+</html>
