@@ -7,10 +7,9 @@
 <body>
 <p th:text="'Hello, ' + ${name} + '!'"/>
 
-<form action="#" th:action="@{/greeting}" th:object="${messageMode}" method="post"><!--th:object="${textFromSubmit}"-->
-    <select id="mode" name="mode" >
+<form action="#" th:action="@{/greeting}" th:object="${messageModeWrapper}" method="post">
+    <select id="mode" name="mode">
         <option
-                name="mode"
                 th:each="variant : ${fillingModeEnum}"
                 th:text="${variant.description}"
                 th:selected="${inputText == variant.description}"
@@ -19,15 +18,17 @@
     <input type="submit" value="save" name="save">
 </form>
 <div th:switch="${inputText}">
-    <div th:case="${T(hello.MessageFillingMode).FILE.description}">
-        <p> file mode selected, please upload file</p>
-        <input type="file" value="file">
-        <input type="submit" name="send">
-    </div>
-        <div th:case="${T(hello.MessageFillingMode).TEXT.description}">
-        <p> file mode selected, please upload file</p>
+    <div th:case="${T(hello.MessageEnum).FILE.description}">
+        <p>Please upload file</p>
         <form th:action="@{/greeting}" method="post">
-            <input type="text" value="mesage">
+            <input type="file" value="file">
+            <input type="submit" name="send">
+        </form>
+    </div>
+    <div th:case="${T(hello.MessageEnum).TEXT.description}">
+        <p>Please fill message text area</p>
+        <form th:action="@{/greeting}" method="post">
+            <input type="text" value="message">
             <input type="submit" name="send">
         </form>
     </div>

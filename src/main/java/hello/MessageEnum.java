@@ -1,11 +1,11 @@
 package hello;
 
-public enum MessageFillingMode {
+public enum MessageEnum {
     FILE("file_mode"),
     TEXT("text_mode");
     ;
 
-    MessageFillingMode(String description) {
+    MessageEnum(String description) {
         this.description = description;
     }
 

@@ -1,9 +1,9 @@
 package hello;
 
-public class MessageMode {
+public class MessageModeWrapper {
     private String mode;
 
-    public MessageMode() {
+    public MessageModeWrapper() {
     }
 
     public void setMode(String mode) {
@@ -14,7 +14,7 @@ public class MessageMode {
         return mode;
     }
 
-    public MessageMode(String mode) {
+    public MessageModeWrapper(String mode) {
         this.mode = mode;
     }
 }
