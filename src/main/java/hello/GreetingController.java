@@ -1,5 +1,6 @@
 package hello;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class GreetingController {
     String transportString = "notInitialized";
+
+    @Autowired
+    WorkService workService;
 
     @GetMapping("/greeting")
     public String greeting(
@@ -31,11 +35,18 @@ public class GreetingController {
 //        if (bindingResult.hasErrors()) {
 //            return "/greeting";
 //        }
-        System.out.println(bindingResult.hasErrors());
-        System.out.println(messageMode.getMode());
+//        System.out.println(bindingResult.hasErrors());
+//        System.out.println(messageMode.getMode());
         transportString = messageMode.getMode();
+        workService.setMessage(transportString);
 
         return String.format("redirect:/greeting?inputText=%s", transportString);
+    }
+
+    @PostMapping(value = "/greeting", params = "send")
+    public String doJob(){
+        workService.doTask();
+        return "redirect:/greeting";
     }
 
 }
