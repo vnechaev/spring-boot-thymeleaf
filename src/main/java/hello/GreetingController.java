@@ -15,11 +15,11 @@ public class GreetingController {
     @GetMapping("/greeting")
     public String greeting(
             @RequestParam(name="name", required=false, defaultValue="World") String name,
-            @RequestParam(name="inputText", required=false, defaultValue="file_mode") String inputText,
+            @RequestParam(name="fillingMode", required=false, defaultValue="file_mode") String fillingMode,
             Model model
     ) {
         model.addAttribute("name", name);
-        model.addAttribute("inputText", inputText);
+        model.addAttribute("fillingMode", fillingMode);
         model.addAttribute("fillingModeEnum", MessageEnum.values());
         return "greeting";
     }
@@ -28,7 +28,7 @@ public class GreetingController {
     @PostMapping(value = "/greeting", params = "save")
     public String getSubmit(MessageModeWrapper messageModeWrapper){
         workService.setMessage(messageModeWrapper.getMode());
-        return String.format("redirect:/greeting?inputText=%s", messageModeWrapper.getMode());
+        return String.format("redirect:/greeting?fillingMode=%s", messageModeWrapper.getMode());
     }
 
     @PostMapping(value = "/greeting", params = "send")

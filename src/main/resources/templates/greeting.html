@@ -12,12 +12,12 @@
         <option
                 th:each="variant : ${fillingModeEnum}"
                 th:text="${variant.description}"
-                th:selected="${inputText == variant.description}"
+                th:selected="${fillingMode == variant.description}"
         />
     </select>
     <input type="submit" value="save" name="save">
 </form>
-<div th:switch="${inputText}">
+<div th:switch="${fillingMode}">
     <div th:case="${T(hello.MessageEnum).FILE.description}">
         <p>Please upload file</p>
         <form th:action="@{/greeting}" method="post">
