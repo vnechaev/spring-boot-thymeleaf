@@ -13,6 +13,7 @@
                 name="mode"
                 th:each="variant : ${fillingModeEnum}"
                 th:text="${variant.description}"
+                th:selected="${inputText == variant.description}"
         />
     </select>
     <input type="submit" value="save" name="save">
